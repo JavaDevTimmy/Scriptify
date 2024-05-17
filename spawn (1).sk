@@ -1,0 +1,67 @@
+command spawn:
+	trigger:
+		set {_loc} to location of block at player
+		play sound "block.note_block.xylophone" to player
+		send "&5Sending u to Spawn in some seconds!"
+		loop 5 times:
+			play sound "block.note_block.xylophone" to player
+			send actionbar "&5Sending u to Spawn in &b%6-loop-value% &5seconds!"
+			if {_loc} is not location of block at player:
+				play sound "block.anvil.destroy" to player
+				send action bar "&7Teleport &8cancelled &7because you moved!"
+				send "&7Teleport &8cancelled &7because you moved!"
+				stop
+			wait 1 second
+		teleport player to {spawn}
+
+command opspawn:
+	permission: op
+	permission message: "Unknown command. Type "/help" for help."
+	trigger: 
+		play sound "entity.player.levelup" to player
+		play sound "entity.enderman.teleport" to player
+		play sound "entity.player.levelup" to player
+		teleport player to {spawn}
+
+command /setspawn:
+    permission: op
+    permission message: <##F00000>You do not have permission to use this command.
+    trigger:
+        set {spawn} to player's location
+        send "&aYou've successfully set the spawn location." to player
+
+command /setPinata:	
+    permission: op
+    permission message: <##F00000>You do not have permission to use this command.
+    trigger:
+        set {Pinata} to player's location
+        send "&aYou've successfully set the Pinata location." to player
+
+
+command Pinata:
+	trigger:
+		set {_loc} to location of block at player
+		play sound "block.note_block.xylophone" to player
+		send "&5Sending u to Spawn in some seconds!"
+		loop 5 times:
+			play sound "block.note_block.xylophone" to player
+			send actionbar "&5Sending u to Pinata in &b%6-loop-value% &5seconds!"
+			if {_loc} is not location of block at player:
+				play sound "block.anvil.destroy" to player
+				send action bar "&7Teleport &8cancelled &7because you moved!"
+				send "&7Teleport &8cancelled &7because you moved!"
+				stop
+			wait 1 second
+		teleport player to {Pinata}
+
+
+
+command /delevent:
+    permission: op
+    permission message: <##F00000>You do not have permission to use this command.
+    trigger:
+        if {Pinata} is set:
+            delete {Pinata}
+            send "&cYou've deleted the Pinata location." to player
+        else:
+            send "&cThe event location isn't set." to player
